@@ -1,0 +1,19 @@
+{
+  "registered" : true,
+  "temporal" : false,
+  "address" : {
+    "streetCode" : 12,
+    "building" : 124
+  }
+}
+
+{
+  "dateOfBirth": "18.03.1995",
+  "apartment": "141",
+  "building": "10",
+  "extension": "2",
+  "givenName": "Павел",
+  "patronymicName": "Николаевич",
+  "streetCode": 1,
+  "surName": "Васильев"
+}
