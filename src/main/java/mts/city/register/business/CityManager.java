@@ -41,10 +41,8 @@ public class CityManager {
 
     public PersonResponse checkPerson(PersonRequest request) {
 
-        // TODO 106
-
         System.out.println(request.getSurName());
-        System.out.println(request.getGivenName());
+        System.out.println(request.getSurName());
         System.out.println(request.getPatronymicName());
         System.out.println(request.getDateOfBirth());
         System.out.println(request.getStreetCode());
@@ -70,7 +68,7 @@ public class CityManager {
         Query query = entityManager.createQuery(hql);
 
         query.setParameter(count++, request.getSurName());
-        query.setParameter(count++, request.getGivenName());
+        query.setParameter(count++, request.getSurName());
         query.setParameter(count++, request.getPatronymicName());
         query.setParameter(count++, request.getDateOfBirth());
         query.setParameter(count++, request.getStreetCode());

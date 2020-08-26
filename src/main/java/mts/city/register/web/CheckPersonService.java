@@ -27,8 +27,6 @@ public class CheckPersonService {
         manager = new CityManager();
     }
 
-
-    // TODO 105
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")

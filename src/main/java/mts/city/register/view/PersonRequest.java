@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class PersonRequest implements Serializable {
 
     private String surName;
-    private String givenName;
+    private String firstName;
     private String patronymicName;
     // Поле, которое использует адаптер
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
@@ -24,7 +24,7 @@ public class PersonRequest implements Serializable {
     public String toString() {
         return "PersonRequest{" +
                 "surName='" + surName + '\'' +
-                ", givenName='" + givenName + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", patronymicName='" + patronymicName + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", streetCode=" + streetCode +
@@ -42,12 +42,12 @@ public class PersonRequest implements Serializable {
         this.surName = surName;
     }
 
-    public String getGivenName() {
-        return givenName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getPatronymicName() {
