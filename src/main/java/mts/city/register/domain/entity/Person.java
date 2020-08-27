@@ -14,10 +14,10 @@ public class Person {
     private long personId;
     @Column(name = "sur_name")
     private String surName;
-    @Column(name = "given_name")
-    private String givenName;
-    @Column(name = "patronymic")
-    private String patronymic;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "patronymic_name")
+    private String patronymicName;
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
     @Column(name = "passport_seria")
@@ -39,8 +39,8 @@ public class Person {
         return "Person{" +
                 "personId=" + personId +
                 ", surName='" + surName + '\'' +
-                ", givenName='" + givenName + '\'' +
-                ", patronymic='" + patronymic + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", patronymicName='" + patronymicName + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", passportSeria='" + passportSeria + '\'' +
                 ", passportNumber='" + passportNumber + '\'' +
@@ -66,20 +66,20 @@ public class Person {
         this.surName = surName;
     }
 
-    public String getGivenName() {
-        return givenName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getPatronymic() {
-        return patronymic;
+    public String getPatronymicName() {
+        return patronymicName;
     }
 
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
+    public void setPatronymicName(String patronymicName) {
+        this.patronymicName = patronymicName;
     }
 
     public LocalDate getDateOfBirth() {

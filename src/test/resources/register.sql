@@ -43,8 +43,8 @@ INSERT INTO cr_adress (district_code, street_code, building, extension, apartmen
 CREATE TABLE cr_person (
 	person_id SERIAL,
     sur_name varchar(100) not null,
-    given_name varchar(100) not null,
-    patronymic varchar(100) not null,
+    firstName varchar(100) not null,
+    patronymicName varchar(100) not null,
     date_of_birth date not null,
     passport_seria varchar(10),
     passport_number varchar(10),
@@ -54,16 +54,16 @@ CREATE TABLE cr_person (
     PRIMARY KEY (person_id)
 );
 
-INSERT INTO cr_person (sur_name, given_name, patronymic, date_of_birth, passport_seria, passport_number, passport_date, certificate_number,certificate_date)
+INSERT INTO cr_person (sur_name, firstName, patronymicName, date_of_birth, passport_seria, passport_number, passport_date, certificate_number,certificate_date)
     VALUES ('Васильев', 'Павел', 'Николаевич', '1995-03-18', '1234', '123456', '2015-04-11', null, null);
 
-INSERT INTO cr_person (sur_name, given_name, patronymic, date_of_birth, passport_seria, passport_number, passport_date, certificate_number,certificate_date)
+INSERT INTO cr_person (sur_name, firstName, patronymicName, date_of_birth, passport_seria, passport_number, passport_date, certificate_number,certificate_date)
     VALUES ('Васильева', 'Ирина', 'Петровна', '1997-04-05', '4321', '654321', '2017-04-05', null, null);
 
-INSERT INTO cr_person (sur_name, given_name, patronymic, date_of_birth, passport_seria, passport_number, passport_date, certificate_number,certificate_date)
+INSERT INTO cr_person (sur_name, firstName, patronymicName, date_of_birth, passport_seria, passport_number, passport_date, certificate_number,certificate_date)
     VALUES ('Васильев', 'Александр', 'Павлович', '2015-01-11', null, null, null, '456123', '2015-01-21');
 
-INSERT INTO cr_person (sur_name, given_name, patronymic, date_of_birth, passport_seria, passport_number, passport_date, certificate_number,certificate_date)
+INSERT INTO cr_person (sur_name, firstName, patronymicName, date_of_birth, passport_seria, passport_number, passport_date, certificate_number,certificate_date)
     VALUES ('Васильева', 'Ирина', 'Петровна', '2018-10-11', null, null, null, '987654', '2018-11-21');
 
 CREATE TABLE cr_adress_person (

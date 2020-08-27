@@ -3,6 +3,8 @@ package mts.city.register.web;
 import mts.city.register.business.CityManager;
 import mts.city.register.view.PersonRequest;
 import mts.city.register.view.PersonResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
@@ -21,9 +23,12 @@ public class CheckPersonService {
 
     CityManager manager;
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(CheckPersonService.class);
+
     @PostConstruct
     public void init() {
-        System.out.println("INIT");
+        logger.info("@PostConstruct INIT");
         manager = new CityManager();
     }
 
@@ -31,6 +36,8 @@ public class CheckPersonService {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON + ";charset=UTF-8")
     public PersonResponse checkPerson(PersonRequest personRequest) {
+
+        logger.info("Incoming request: " + personRequest.toString());
 
 //        PersonRequest pr = new PersonRequest();
 //        pr.setSurName("Васильев");
@@ -42,8 +49,6 @@ public class CheckPersonService {
 //        pr.setExtension("2");
 //        pr.setApartment("141");
 //
-        System.out.println(personRequest);
-
         return manager.checkPerson(personRequest);
     }
 
