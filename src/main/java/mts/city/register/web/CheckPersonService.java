@@ -39,16 +39,6 @@ public class CheckPersonService {
 
         logger.info("Incoming request: " + personRequest.toString());
 
-//        PersonRequest pr = new PersonRequest();
-//        pr.setSurName("Васильев");
-//        pr.setGivenName("Павел");
-//        pr.setPatronymicName("Николаевич");
-//        pr.setDateOfBirth(LocalDate.of(1995,3,18));
-//        pr.setStreetCode(1);
-//        pr.setBuilding("10");
-//        pr.setExtension("2");
-//        pr.setApartment("141");
-//
         return manager.checkPerson(personRequest);
     }
 

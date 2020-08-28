@@ -30,7 +30,7 @@ public class Person {
     private String certificateNumber;
     @Column(name = "certificate_date")
     private LocalDate certificateDate;
-    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "person")
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "person")
     private List<AdressPerson> adresses;
 
 

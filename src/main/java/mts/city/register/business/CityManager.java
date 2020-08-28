@@ -16,16 +16,16 @@ public class CityManager {
             LoggerFactory.getLogger(CityManager.class);
 
     private static final String HQL_REQUEST = "select ap.temporal from AdressPerson ap " +
-            "inner join Person p on p.personId = ap.person " +
-            "inner join Adress a on a.adressId = ap.adress " +
+                "inner join Person p on p.personId = ap.person " +
+                "inner join Adress a on a.adressId = ap.adress " +
             "where " +
-            "CURRENT_DATE >= ap.startDate and (CURRENT_DATE <= ap.endDate or ap.endDate is null)" +
-            "and p.surName = ?1 " +
-            "and p.firstName  = ?2 " +
-            "and p.patronymicName = ?3 " +
-            "and p.dateOfBirth = ?4 " +
-            "and a.streetCode = ?5 " +
-            "and a.building = ?6 ";
+                "CURRENT_DATE >= ap.startDate and (CURRENT_DATE <= ap.endDate or ap.endDate is null) " +
+                "and p.surName = ?1 " +
+                "and p.firstName  = ?2 " +
+                "and p.patronymicName = ?3 " +
+                "and p.dateOfBirth = ?4 " +
+                "and a.streetCode = ?5 " +
+                "and a.building = ?6 ";
 
     //возможно, тут должен быть экземпляр фабрики, у которой получаем менеджера
     private CityDao dao;
@@ -33,15 +33,6 @@ public class CityManager {
     public CityManager() {
         dao = new CityDao();
     }
-
-//    public void viewAdressList() {
-//
-//        EntityManager entityManager = getEntityManager();
-//        List list = entityManager.createQuery("FROM Adress").getResultList();
-//        list.forEach(p1 -> System.out.println(p1));
-//        entityManager.close();
-//
-//    }
 
 
     public PersonResponse checkPerson(PersonRequest request) {
@@ -52,14 +43,14 @@ public class CityManager {
         PersonResponse response = new PersonResponse();
         String hql = HQL_REQUEST;
 
-        if (request.getExtension() != null) {
-            hql += " and a.extension = ?7 ";
-        } else {
-            hql += " and a.extension is null ";
-        }
+//        if (request.getExtension() != null) {
+//            hql += " and a.extension = ?7 ";
+//        } else {
+//            hql += " and a.extension is null ";
+//        }
 
         if (request.getApartment() != null) {
-            hql += " and a.apartment = ?8 ";
+            hql += " and a.apartment = ?7 ";
         } else {
             hql += " and a.apartment is null ";
         }
@@ -68,11 +59,12 @@ public class CityManager {
 
         int count = 1;
         logger.info("--------------> Creating HQL");
+
         Query query = entityManager.createQuery(hql);
         logger.info("--------------> Setting 1 " + count);
         query.setParameter(count++, request.getSurName());
         logger.info("--------------> Setting 2 " + count);
-        query.setParameter(count++, request.getSurName());
+        query.setParameter(count++, request.getFirstName());
         logger.info("--------------> Setting 3 " + count);
         query.setParameter(count++, request.getPatronymicName());
         logger.info("--------------> Setting 4 " + count);
@@ -82,12 +74,12 @@ public class CityManager {
         logger.info("--------------> Setting 6 " + count);
         query.setParameter(count++, request.getBuilding());
 
-        if (request.getExtension() != null) {
-            logger.info("--------------> Setting 7 " + count);
-            query.setParameter(count++, request.getExtension());
-        }
+//        if (request.getExtension() != null) {
+//            logger.info("--------------> Setting 7 " + count);
+//            query.setParameter(count++, request.getExtension());
+//        }
         if (request.getApartment() != null) {
-            logger.info("--------------> Setting 8 " + count);
+            logger.info("--------------> Setting 7 " + count);
             query.setParameter(count++, request.getApartment());
         }
 
