@@ -43,14 +43,15 @@ public class CityManager {
         PersonResponse response = new PersonResponse();
         String hql = HQL_REQUEST;
 
-//        if (request.getExtension() != null) {
-//            hql += " and a.extension = ?7 ";
-//        } else {
-//            hql += " and a.extension is null ";
-//        }
+        if (request.getExtension() != null && request.getExtension() != "null" && request.getExtension() != "") {
+            hql += " and a.extension = ?7 ";
 
-        if (request.getApartment() != null) {
-            hql += " and a.apartment = ?7 ";
+        } else {
+            hql += " and a.extension is null ";
+        }
+
+        if (request.getApartment() != null && request.getApartment() != "null" && request.getApartment() != "") {
+            hql += " and a.apartment = ?8 ";
         } else {
             hql += " and a.apartment is null ";
         }
@@ -74,13 +75,14 @@ public class CityManager {
         logger.info("--------------> Setting 6 " + count);
         query.setParameter(count++, request.getBuilding());
 
-//        if (request.getExtension() != null) {
-//            logger.info("--------------> Setting 7 " + count);
-//            query.setParameter(count++, request.getExtension());
-//        }
-        if (request.getApartment() != null) {
+        if (request.getExtension() != null && request.getExtension() != "null" && request.getExtension() != "") {
             logger.info("--------------> Setting 7 " + count);
-            query.setParameter(count++, request.getApartment());
+            query.setParameter(count++, request.getExtension());
+        }
+
+        if (request.getApartment() != null && request.getApartment() != "null" && request.getApartment() != "") {
+            logger.info("--------------> Setting 8 " + count);
+            query.setParameter(8, request.getApartment());
         }
 
         logger.info("Final hql: " + hql);
