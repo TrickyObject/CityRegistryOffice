@@ -37,6 +37,8 @@ public class CityManager {
 
     public PersonResponse checkPerson(PersonRequest request) {
 
+        int countParam = 7;
+
         logger.info("checkPerson: " + request.toString());
 
         EntityManager entityManager = getEntityManager();
@@ -44,14 +46,17 @@ public class CityManager {
         String hql = HQL_REQUEST;
 
         if (request.getExtension() != null && request.getExtension() != "null" && request.getExtension() != "") {
-            hql += " and a.extension = ?7 ";
+//            hql += " and a.extension = ?7 ";
+            hql += " and a.extension = ?" + countParam + " ";
+            countParam++;
 
         } else {
             hql += " and a.extension is null ";
         }
 
         if (request.getApartment() != null && request.getApartment() != "null" && request.getApartment() != "") {
-            hql += " and a.apartment = ?8 ";
+            hql += " and a.apartment = ?" + countParam + " ";
+            countParam++;
         } else {
             hql += " and a.apartment is null ";
         }
@@ -82,7 +87,7 @@ public class CityManager {
 
         if (request.getApartment() != null && request.getApartment() != "null" && request.getApartment() != "") {
             logger.info("--------------> Setting 8 " + count);
-            query.setParameter(8, request.getApartment());
+            query.setParameter(count++, request.getApartment());
         }
 
         logger.info("Final hql: " + hql);
