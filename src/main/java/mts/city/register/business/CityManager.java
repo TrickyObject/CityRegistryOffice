@@ -46,17 +46,20 @@ public class CityManager {
         String hql = HQL_REQUEST;
 
         if (request.getExtension() != null && request.getExtension() != "null" && request.getExtension() != "") {
-//            hql += " and a.extension = ?7 ";
-            hql += " and a.extension = ?" + countParam + " ";
-            countParam++;
+            // TODO: FIX
+            hql += " and a.extension = ?7 ";
+//            hql += " and a.extension = ?" + countParam + " ";
+//            countParam++;
 
         } else {
             hql += " and a.extension is null ";
         }
 
         if (request.getApartment() != null && request.getApartment() != "null" && request.getApartment() != "") {
-            hql += " and a.apartment = ?" + countParam + " ";
-            countParam++;
+            // TODO: FIX
+            hql += " and a.extension = ?8 ";
+//            hql += " and a.apartment = ?" + countParam + " ";
+//            countParam++;
         } else {
             hql += " and a.apartment is null ";
         }
@@ -66,47 +69,52 @@ public class CityManager {
         int count = 1;
         logger.info("--------------> Creating HQL");
 
-        Query query = entityManager.createQuery(hql);
-        logger.info("--------------> Setting 1 " + count);
-        query.setParameter(count++, request.getSurName());
-        logger.info("--------------> Setting 2 " + count);
-        query.setParameter(count++, request.getFirstName());
-        logger.info("--------------> Setting 3 " + count);
-        query.setParameter(count++, request.getPatronymicName());
-        logger.info("--------------> Setting 4 " + count);
-        query.setParameter(count++, request.getDateOfBirth());
-        logger.info("--------------> Setting 5 " + count);
-        query.setParameter(count++, request.getStreetCode());
-        logger.info("--------------> Setting 6 " + count);
-        query.setParameter(count++, request.getBuilding());
+        try {
+            Query query = entityManager.createQuery(hql);
+            logger.info("--------------> Setting 1 " + count);
+            query.setParameter(count++, request.getSurName());
+            logger.info("--------------> Setting 2 " + count);
+            query.setParameter(count++, request.getFirstName());
+            logger.info("--------------> Setting 3 " + count);
+            query.setParameter(count++, request.getPatronymicName());
+            logger.info("--------------> Setting 4 " + count);
+            query.setParameter(count++, request.getDateOfBirth());
+            logger.info("--------------> Setting 5 " + count);
+            query.setParameter(count++, request.getStreetCode());
+            logger.info("--------------> Setting 6 " + count);
+            query.setParameter(count++, request.getBuilding());
 
-        if (request.getExtension() != null && request.getExtension() != "null" && request.getExtension() != "") {
-            logger.info("--------------> Setting 7 " + count);
-            query.setParameter(count++, request.getExtension());
+            if (request.getExtension() != null && request.getExtension() != "null" && request.getExtension() != "") {
+                logger.info("--------------> Setting 7 " + count);
+                query.setParameter(count++, request.getExtension());
+            }
+
+            if (request.getApartment() != null && request.getApartment() != "null" && request.getApartment() != "") {
+                logger.info("--------------> Setting 8 " + count);
+                query.setParameter(count++, request.getApartment());
+            }
+
+            logger.info("Final hql: " + hql);
+
+            List resultList = query.getResultList();
+
+            logger.info("Data result: " + resultList);
+
+
+            for (int i = 0; i < resultList.size(); i++) {
+                response.setRegistered(true);
+                response.setTemporal((Boolean) resultList.get(i));
+            }
+
+            entityManager.close();
+
+            logger.info("Response: " + response);
+
+            return response;
+        } catch (Exception e) {
+            throw new IllegalArgumentException(e);
         }
 
-        if (request.getApartment() != null && request.getApartment() != "null" && request.getApartment() != "") {
-            logger.info("--------------> Setting 8 " + count);
-            query.setParameter(count++, request.getApartment());
-        }
-
-        logger.info("Final hql: " + hql);
-
-        List resultList = query.getResultList();
-
-        logger.info("Data result: " + resultList);
-
-
-        for (int i = 0; i < resultList.size(); i++) {
-            response.setRegistered(true);
-            response.setTemporal((Boolean) resultList.get(i));
-        }
-
-        entityManager.close();
-
-        logger.info("Response: " + response);
-
-        return response;
     }
 
     private EntityManager getEntityManager() {
