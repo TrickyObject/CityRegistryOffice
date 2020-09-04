@@ -4,6 +4,7 @@ import mts.city.register.dao.CityDao;
 import mts.city.register.view.PersonRequest;
 import mts.city.register.view.PersonResponse;
 import org.glassfish.jersey.internal.util.ExceptionUtils;
+import org.hibernate.exception.JDBCConnectionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,20 +48,18 @@ public class CityManager {
         String hql = HQL_REQUEST;
 
         if (request.getExtension() != null && request.getExtension() != "null" && request.getExtension() != "") {
-            // TODO: FIX
-            hql += " and a.extension = ?7 ";
-//            hql += " and a.extension = ?" + countParam + " ";
-//            countParam++;
+//            hql += " and a.extension = ?7 ";
+            hql += " and a.extension = ?" + countParam + " ";
+            countParam++;
 
         } else {
             hql += " and a.extension is null ";
         }
 
         if (request.getApartment() != null && request.getApartment() != "null" && request.getApartment() != "") {
-            // TODO: FIX
-            hql += " and a.extension = ?8 ";
-//            hql += " and a.apartment = ?" + countParam + " ";
-//            countParam++;
+//            hql += " and a.extension = ?8 ";
+            hql += " and a.apartment = ?" + countParam + " ";
+            countParam++;
         } else {
             hql += " and a.apartment is null ";
         }
@@ -119,6 +118,14 @@ public class CityManager {
             response.getError().append("Не верный формат аргумента");
             logger.info("Отправлен отчёт об ошибке..");
             return response;
+
+        } catch (JDBCConnectionException e) {
+            logger.info("EXCEPTION:" + e.getMessage());
+            e.printStackTrace();
+            response.getError().append("Нет соединения с БД");
+            logger.info("Отправлен отчёт об ошибке..");
+            return response;
+
         } catch (Exception e) {
             logger.info("EXCEPTION:" + e.getMessage());
             e.printStackTrace();
