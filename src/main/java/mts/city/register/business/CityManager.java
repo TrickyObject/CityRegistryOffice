@@ -3,6 +3,7 @@ package mts.city.register.business;
 import mts.city.register.dao.CityDao;
 import mts.city.register.view.PersonRequest;
 import mts.city.register.view.PersonResponse;
+import org.glassfish.jersey.internal.util.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -113,7 +114,16 @@ public class CityManager {
             return response;
         } catch (IllegalArgumentException e) {
 //            throw new IllegalArgumentException(e);
+            logger.info("EXCEPTION:" + e.getMessage());
+            e.printStackTrace();
             response.getError().append("Не верный формат аргумента");
+            logger.info("Отправлен отчёт об ошибке..");
+            return response;
+        } catch (Exception e) {
+            logger.info("EXCEPTION:" + e.getMessage());
+            e.printStackTrace();
+            response.getError().append("Не ошибка сервиса при проверке данных");
+            logger.info("Отправлен отчёт об ошибке..");
             return response;
         }
 
