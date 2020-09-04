@@ -6,12 +6,20 @@ public class PersonResponse implements Serializable {
 
     private boolean registered;
     private boolean temporal;
+    private StringBuilder error;
+
+    public PersonResponse() {
+        this.registered = false;
+        this.temporal = false;
+        this.error = new StringBuilder("");
+    }
 
     @Override
     public String toString() {
         return "PersonResponse{" +
                 "registered=" + registered +
                 ", temporal=" + temporal +
+                ", error=" + error +
                 '}';
     }
 
@@ -29,5 +37,13 @@ public class PersonResponse implements Serializable {
 
     public void setTemporal(boolean temporal) {
         this.temporal = temporal;
+    }
+
+    public StringBuilder getError() {
+        return error;
+    }
+
+    public void setError(StringBuilder error) {
+        this.error = error;
     }
 }

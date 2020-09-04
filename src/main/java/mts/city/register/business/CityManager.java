@@ -111,8 +111,10 @@ public class CityManager {
             logger.info("Response: " + response);
 
             return response;
-        } catch (Exception e) {
-            throw new IllegalArgumentException(e);
+        } catch (IllegalArgumentException e) {
+//            throw new IllegalArgumentException(e);
+            response.getError().append("Не верный формат аргумента");
+            return response;
         }
 
     }
